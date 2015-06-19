@@ -135,3 +135,52 @@ public static function slugify($string, $replace = array(), $delimiter = '-')
 ```
 
 Source : https://github.com/phalcon/incubator/blob/master/Library/Phalcon/Utils/Slug.php
+
+## Create a diff array (insert/update/delete)
+
+```php
+function diff_array($new, $old)
+{
+	$diff = [];
+	foreach ($new as $e) {
+		if (in_array($e, $old)) {
+			$diff["update"][] = $e;
+		} else {
+			$diff["insert"][] = $e;
+		}
+	}
+	foreach ($old as $e) {
+		if (!in_array($e, $new)) {
+			$diff["delete"][] = $e;
+		}
+	}
+	return $diff;
+}
+
+$new = ["red", "blue", "green"];	// My new article's tags
+$old = ["green", "violet", "purple"];	// My old article's tags
+
+print_r(diff_array($new, $old));
+/*
+Output :
+Array
+(
+	[insert] => Array
+	(
+		[0] => red
+		[1] => blue
+	)
+	
+	[update] => Array
+	(
+		[0] => green
+	)
+	
+	[delete] => Array
+	(
+		[0] => violet
+		[1] => purple
+	)
+)
+*/
+```
