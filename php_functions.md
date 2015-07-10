@@ -184,3 +184,42 @@ Array
 )
 */
 ```
+
+## Shuffle an array and preserve keys
+
+```php
+function shuffle_assoc(&$array) {
+	$keys = array_keys($array);
+	shuffle($keys);
+	foreach($keys as $key) {
+		$new[$key] = $array[$key];
+	}
+	$array = $new;
+}
+
+$array1 = $array2 = ["key1" => "red", "key2" => "blue", 3 => "green"];
+
+shuffle($array1);
+shuffle_assoc($array2);
+
+print_r($array1);
+print_r($array2);
+
+/*
+Output (by example) :
+Array
+(
+    [0] => red
+    [1] => blue
+    [2] => green
+)
+Array
+(
+    [key1] => red
+    [3] => green
+    [key2] => blue
+)
+*/
+```
+
+Source : http://php.net/manual/en/function.shuffle.php#94697
