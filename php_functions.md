@@ -24,13 +24,9 @@ function time_elapsed($secs){
 	
 	return join(' ', $ret);
 }
-```
 
-Usage :
-
-```php
 echo time_elapsed(8000);
-// display "2 hours 13 minutes and 20 seconds ago.";
+// displays "2 hours 13 minutes and 20 seconds ago.";
 ```
 
 Source : http://php.net/manual/fr/function.time.php#108581
@@ -112,7 +108,7 @@ $response = $mail->send();
 ## Generate a slug in multi-language
 
 ```php
-public static function slugify($string, $replace = array(), $delimiter = '-')
+function slugify($string, $replace = array(), $delimiter = '-')
 {
 	if (!extension_loaded('iconv')) {
 		throw new Exception('iconv module not loaded');
@@ -132,6 +128,9 @@ public static function slugify($string, $replace = array(), $delimiter = '-')
 	setlocale(LC_ALL, $oldLocale);
 	return $clean;
 }
+
+echo slugify("L'incroyable étoile !");
+// displays "lincroyable-etoile"
 ```
 
 Source : https://github.com/phalcon/incubator/blob/master/Library/Phalcon/Utils/Slug.php
